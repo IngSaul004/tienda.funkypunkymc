@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda · FUNKY PUNKY MC</title>
+  <meta name="description" content="Tienda oficial de FUNKY PUNKY MC, servidor survival crossplay Java + Bedrock. Próximamente.">
+  <meta name="theme-color" content="#140a1f">
+
+  <!-- Vista previa al compartir el enlace (Discord, WhatsApp, X) -->
+  <meta property="og:title" content="Tienda · FUNKY PUNKY MC">
+  <meta property="og:description" content="Rangos cosméticos FUNKY VIP, VIP+ y GOLD. Muy pronto.">
+  <meta property="og:type" content="website">
+
+  <!-- Ícono de la pestaña: estrella ✦ dibujada en SVG, sin archivos extra -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23FF40FF'>✦</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Paleta FUNKY PUNKY (misma que hologramas y Discord) ===== */
+    :root {
+      --bg: #140a1f;
+      --bg-2: #1e1030;
+      --card: rgba(255, 255, 255, 0.04);
+      --border: rgba(214, 184, 255, 0.18);
+      --text: #f3eaff;
+      --muted: #b9a6d6;
+      --rosa: #FF40FF;      /* títulos */
+      --lila: #D6B8FF;      /* texto lila */
+      --cmd: #C8A0FF;       /* comandos */
+      /* Colores de rango = códigos & de Minecraft = roles de Discord */
+      --vip: #55FFFF;       /* &b */
+      --vipplus: #FF55FF;   /* &d */
+      --gold: #FFAA00;      /* &6 */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Nunito", system-ui, sans-serif;
+      background: radial-gradient(ellipse at top, #2a1245 0%, var(--bg) 55%) fixed, var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Estrellas de fondo (puro CSS) */
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, #fff8 50%, transparent 51%),
+        radial-gradient(2px 2px at 80% 10%, #ff9cff99 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 30% 70%, #fff6 50%, transparent 51%),
+        radial-gradient(2px 2px at 65% 55%, #d6b8ff88 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 90% 80%, #fff5 50%, transparent 51%),
+        radial-gradient(2px 2px at 45% 15%, #ff40ff66 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 15% 90%, #fff6 50%, transparent 51%);
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { opacity: .5; } to { opacity: 1; } }
+
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto; padding: 0 16px;
+    }
+
+    .pixel { font-family: "Press Start 2P", monospace; letter-spacing: .5px; }
+
+    /* ===== Encabezado ===== */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0; gap: 12px; flex-wrap: wrap;
+    }
+    .logo { font-size: 14px; color: var(--rosa); text-decoration: none; }
+    .logo span { color: var(--lila); }
+    .btn-discord {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #5865F2; color: #fff; text-decoration: none;
+      padding: 10px 18px; border-radius: 10px; font-weight: 800;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-discord:hover { transform: translateY(-2px); box-shadow: 0 6px 20px #5865f266; }
+
+    /* ===== Portada ===== */
+    .hero { text-align: center; padding: 56px 0 40px; }
+    .badge {
+      display: inline-block; font-size: 10px; color: var(--bg);
+      background: var(--rosa); padding: 8px 14px; border-radius: 6px;
+      margin-bottom: 24px; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 50% { box-shadow: 0 0 24px #ff40ffaa; } }
+    .hero h1 {
+      font-size: clamp(22px, 6vw, 44px); line-height: 1.4;
+      color: var(--rosa); text-shadow: 4px 4px 0 #5a0f5a;
+      margin-bottom: 12px;
+    }
+    .hero h2 {
+      font-size: clamp(12px, 3vw, 18px); color: var(--lila); margin-bottom: 22px;
+    }
+    .hero p { color: var(--muted); max-width: 580px; margin: 0 auto 30px; font-size: 1.05rem; }
+
+    /* ===== Cómo entrar ===== */
+    .ips {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px; max-width: 640px; margin: 0 auto;
+    }
+    .ip {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px; text-align: left;
+    }
+    .ip small { color: var(--muted); font-weight: 600; display: block; margin-bottom: 6px; }
+    .ip-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .ip code { font-family: "Press Start 2P", monospace; font-size: 10px; color: var(--cmd); word-break: break-all; line-height: 1.8; }
+    .copy {
+      flex-shrink: 0; background: transparent; border: 1px solid var(--border);
+      color: var(--lila); border-radius: 8px; padding: 6px 10px; cursor: pointer;
+      font: 600 13px "Nunito", sans-serif; transition: background .15s;
+    }
+    .copy:hover { background: #ffffff12; }
+    .copy.ok { border-color: #55FF55; color: #55FF55; }
+
+    /* ===== Secciones ===== */
+    section { padding: 48px 0; }
+    .titulo {
+      text-align: center; font-size: clamp(13px, 3.4vw, 20px);
+      color: var(--rosa); margin-bottom: 10px;
+    }
+    .sub { text-align: center; color: var(--muted); margin-bottom: 32px; }
+
+    /* ===== Tarjetas de rango ===== */
+    .rangos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+    .rango {
+      position: relative; background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 26px 22px; overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .rango:hover { transform: translateY(-4px); border-color: var(--c); }
+    .rango::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--c);
+    }
+    .rango .nivel { color: var(--muted); font-size: .85rem; font-weight: 600; }
+    .rango h3 { font-family: "Press Start 2P", monospace; font-size: 15px; color: var(--c); margin: 12px 0 16px; line-height: 1.5; }
+    .rango ul { list-style: none; margin-bottom: 22px; }
+    .rango li { padding: 5px 0 5px 22px; position: relative; color: var(--text); }
+    .rango li::before { content: "»"; position: absolute; left: 4px; color: var(--c); font-weight: 800; }
+    .precio {
+      display: block; text-align: center; padding: 12px; border-radius: 10px;
+      border: 1px dashed var(--c); color: var(--c); font-weight: 800;
+    }
+    .vip { --c: var(--vip); }
+    .vipplus { --c: var(--vipplus); }
+    .gold { --c: var(--gold); }
+
+    /* Brillo que recorre FUNKY GOLD, igual que la animación de TAB */
+    .gold h3 {
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold) 40%, #fff 50%, var(--gold) 60%, var(--gold) 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: brillo 1.7s linear infinite;
+    }
+    @keyframes brillo { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+    .tag-top {
+      position: absolute; top: 16px; right: 16px; font-size: .72rem; font-weight: 800;
+      background: var(--gold); color: #2a1600; padding: 3px 9px; border-radius: 99px;
+    }
+
+    /* ===== Aviso de juego justo ===== */
+    .justo {
+      background: linear-gradient(135deg, #ff40ff14, #d6b8ff0d);
+      border: 1px solid var(--border); border-radius: 18px;
+      padding: 26px; display: flex; gap: 18px; align-items: flex-start;
+    }
+    .justo .ico { font-size: 34px; line-height: 1; }
+    .justo h3 { color: var(--lila); margin-bottom: 6px; }
+    .justo p { color: var(--muted); }
+
+    /* ===== Preguntas ===== */
+    .faq { max-width: 720px; margin: 0 auto; }
+    details {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 10px; padding: 0 18px;
+    }
+    summary {
+      cursor: pointer; padding: 16px 0; font-weight: 800; list-style: none;
+      display: flex; justify-content: space-between; gap: 12px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--rosa); font-size: 1.3rem; line-height: 1; transition: transform .2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { color: var(--muted); padding-bottom: 16px; }
+
+    /* ===== Llamado final ===== */
+    .cta { text-align: center; }
+    .cta p { color: var(--muted); margin-bottom: 22px; }
+
+    footer {
+      text-align: center; color: var(--muted); font-size: .82rem;
+      padding: 36px 0 44px; border-top: 1px solid var(--border); margin-top: 20px;
+    }
+    footer p + p { margin-top: 6px; }
+
+    @media (max-width: 520px) {
+      .justo { flex-direction: column; }
+      .logo { font-size: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before { animation: none !important; transition: none !important; }
+      .gold h3 { color: var(--gold); background: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <a class="logo pixel" href="#">✦ FUNKY <span>PUNKY</span></a>
+      <a class="btn-discord" href="https://discord.gg/xTvJvncTq" target="_blank" rel="noopener">Únete al Discord</a>
+    </header>
+
+    <main>
+      <!-- Portada -->
+      <section class="hero">
+        <span class="badge pixel">PRÓXIMAMENTE</span>
+        <h1 class="pixel">TIENDA<br>FUNKY PUNKY</h1>
+        <h2 class="pixel">✦ Abre muy pronto ✦</h2>
+        <p>Estamos preparando el servidor y su tienda. Survival crossplay Java + Bedrock donde las Bandas comercian y compiten en trials por la Fama.</p>
+
+        <div class="ips">
+          <div class="ip">
+            <small>☕ Java</small>
+            <div class="ip-row">
+              <code>mc.funkypunky.lat</code>
+              <button class="copy" data-copy="mc.funkypunky.lat">Copiar</button>
+            </div>
+          </div>
+          <div class="ip">
+            <small>📱 Bedrock · puerto 33478</small>
+            <div class="ip-row">
+              <code>mc.funkypunky.lat</code>
+              <button class="copy" data-copy="mc.funkypunky.lat">Copiar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rangos -->
+      <section id="rangos">
+        <h2 class="titulo pixel">Rangos de donador</h2>
+        <p class="sub">Un adelanto de lo que vendrá. Todo es cosmético.</p>
+
+        <div class="rangos">
+          <article class="rango vip">
+            <span class="nivel">Nivel 1</span>
+            <h3>FUNKY VIP</h3>
+            <ul>
+              <li>Prefijo [FUNKY VIP] en chat y tablist</li>
+              <li>Escribir con colores en el chat</li>
+              <li>Rol en Discord</li>
+            </ul>
+            <span class="precio">Precio próximamente</span>
+          </article>
+
+          <article class="rango vipplus">
+            <span class="nivel">Nivel 2</span>
+            <h3>FUNKY VIP+</h3>
+            <ul>
+              <li>Todo lo de FUNKY VIP</li>
+              <li>Prefijo [FUNKY VIP+]</li>
+              <li>Usar cualquier bloque como sombrero</li>
+            </ul>
+            <span class="precio">Precio próximamente</span>
+          </article>
+
+          <article class="rango gold">
+            <span class="tag-top">TOP</span>
+            <span class="nivel">Nivel 3</span>
+            <h3>FUNKY GOLD</h3>
+            <ul>
+              <li>Todo lo de FUNKY VIP+</li>
+              <li>Prefijo animado en la tablist</li>
+              <li>Apodo personalizado con colores</li>
+            </ul>
+            <span class="precio">Precio próximamente</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- Juego justo -->
+      <section>
+        <div class="justo">
+          <div class="ico">⚖️</div>
+          <div>
+            <h3>Juego justo para todos</h3>
+            <p>Ningún rango da ventaja: no compras más tiendas, homes, oficios, dinero ni objetos. Lo que se gana en FUNKY PUNKY (la Fama de tu Banda) se gana jugando. Así lo piden las reglas de Mojang y así lo queremos nosotros.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preguntas -->
+      <section>
+        <h2 class="titulo pixel">Preguntas</h2>
+        <div class="faq">
+          <details>
+            <summary>¿Cuándo abre el servidor?</summary>
+            <p>Muy pronto. Anunciaremos la fecha en Discord: entra y activa el rol 🔔 Anuncios para enterarte primero.</p>
+          </details>
+          <details>
+            <summary>¿Puedo jugar desde celular o consola?</summary>
+            <p>Sí. Es crossplay: Java en PC y Bedrock en celular, Windows y consolas, todos en el mismo mundo.</p>
+          </details>
+          <details>
+            <summary>¿Ya puedo comprar un rango?</summary>
+            <p>Todavía no. La tienda abrirá junto con el servidor. Nunca te pediremos pagos por Discord ni por mensaje privado.</p>
+          </details>
+          <details>
+            <summary>¿Necesito un rango para jugar?</summary>
+            <p>No. El servidor es gratis y completo para todos. Los rangos solo sirven para lucir y apoyar al servidor.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Llamado final -->
+      <section class="cta">
+        <h2 class="titulo pixel">¿Te avisamos?</h2>
+        <p>Únete al Discord y activa 🔔 Anuncios para saber cuándo abrimos.</p>
+        <a class="btn-discord" href="https://discord.gg/xTvJvncTq" target="_blank" rel="noopener">Entrar al Discord</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year">2026</span> FUNKY PUNKY MC</p>
+      <p>No somos un producto oficial de Minecraft. No aprobado por Mojang ni Microsoft, ni asociado con ellos.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Botones "Copiar": copian la dirección y avisan por 1.5 s
+    document.querySelectorAll(".copy").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(btn.dataset.copy);
+          btn.textContent = "¡Copiado!";
+          btn.classList.add("ok");
+        } catch (e) {
+          btn.textContent = "Cópialo a mano";
+        }
+        setTimeout(() => { btn.textContent = "Copiar"; btn.classList.remove("ok"); }, 1500);
+      });
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
