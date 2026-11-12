@@ -158,6 +158,10 @@
       animation: brillo 1.7s linear infinite;
     }
     @keyframes brillo { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+    .pronto-tag {
+      font-style: normal; font-size: .7rem; font-weight: 800; text-transform: uppercase;
+      border: 1px solid var(--c); color: var(--c); padding: 1px 6px; border-radius: 99px; margin-left: 4px;
+    }
     .tag-top {
       position: absolute; top: 16px; right: 16px; font-size: .72rem; font-weight: 800;
       background: var(--gold); color: #2a1600; padding: 3px 9px; border-radius: 99px;
@@ -326,6 +330,7 @@
               <li>Prefijo animado con brillo en la tablist</li>
               <li>Apodo personalizado con colores (/nick)</li>
               <li>Rol 🌟 FUNKY GOLD en Discord</li>
+              <li>Mascotas que te siguen (solo decoración) <em class="pronto-tag">pronto</em></li>
             </ul>
             <div class="precio"></div>
             <a class="btn" href="#comprar">Cómo comprarlo</a>
@@ -334,9 +339,8 @@
 
         <div class="caja pronto">
           <h3>✧ Próximamente para los rangos</h3>
-          <p>Estamos preparando más cosméticos. Se anunciarán en Discord cuando estén listos.</p>
+          <p>Estamos preparando más cosméticos. Se anunciarán en Discord cuando estén listos. Las <b>mascotas</b> serán exclusivas de FUNKY GOLD.</p>
           <ul>
-            <li>Mascotas que te siguen (solo decoración)</li>
             <li>Modelos exclusivos de armas y herramientas (misma fuerza que las normales)</li>
             <li>Partículas y estelas</li>
           </ul>
@@ -419,6 +423,10 @@
             <p>Lo entregamos en cuanto un OWNER confirma que el pago llegó a nuestra cuenta de PayPal. Te avisamos en tu ticket.</p>
           </details>
           <details>
+            <summary>¿Cuánto dura un rango?</summary>
+            <p>30 días desde que te lo damos. Al terminar, el rango se quita solo. Si lo vuelves a comprar antes de que se acabe, los días se suman a los que te quedan.</p>
+          </details>
+          <details>
             <summary>¿Puedo jugar desde celular o consola?</summary>
             <p>Sí. Es crossplay: Java en PC y Bedrock en celular, Windows y consolas, todos en el mismo mundo. Los rangos funcionan igual en las dos ediciones.</p>
           </details>
@@ -447,7 +455,7 @@
     //  "Precio próximamente" (nunca anunciar un número sin decidir).
     // ================================================================
     const PRECIOS_MXN = { vip: null, vipplus: null, gold: null };   // ejemplo: { vip: 50, vipplus: 100, gold: 180 }
-    const DURACION = null;                                          // ejemplo: "Permanente" o "Por 30 días"
+    const DURACION = "Por 30 días";                                 // ejemplo: "Permanente" o "Por 30 días"
 
     const mxn = n => "$" + n.toLocaleString("es-MX") + " ";
 
