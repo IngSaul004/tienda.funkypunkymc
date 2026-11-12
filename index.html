@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tienda · FUNKY PUNKY MC</title>
-  <meta name="description" content="Tienda oficial de FUNKY PUNKY MC, servidor survival crossplay Java + Bedrock. Próximamente.">
+  <meta name="description" content="Tienda oficial de FUNKY PUNKY MC, survival crossplay Java + Bedrock. Rangos cosméticos FUNKY VIP, VIP+ y GOLD.">
   <meta name="theme-color" content="#140a1f">
 
   <!-- Vista previa al compartir el enlace (Discord, WhatsApp, X) -->
   <meta property="og:title" content="Tienda · FUNKY PUNKY MC">
-  <meta property="og:description" content="Rangos cosméticos FUNKY VIP, VIP+ y GOLD. Muy pronto.">
+  <meta property="og:description" content="Rangos cosméticos FUNKY VIP, VIP+ y GOLD. Apoya al servidor y luce tu rango.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tienda.funkypunky.lat/">
+  <meta property="og:image" content="https://tienda.funkypunky.lat/og.jpg">
+  <meta name="twitter:card" content="summary">
 
-  <!-- Ícono de la pestaña: estrella ✦ dibujada en SVG, sin archivos extra -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23FF40FF'>✦</text></svg>">
+  <link rel="icon" type="image/png" href="favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +33,8 @@
       --rosa: #FF40FF;      /* títulos */
       --lila: #D6B8FF;      /* texto lila */
       --cmd: #C8A0FF;       /* comandos */
+      --ok: #55FF55;        /* &a */
+      --mal: #FF5555;       /* &c */
       /* Colores de rango = códigos & de Minecraft = roles de Discord */
       --vip: #55FFFF;       /* &b */
       --vipplus: #FF55FF;   /* &d */
@@ -63,55 +67,48 @@
     }
     @keyframes twinkle { from { opacity: .5; } to { opacity: 1; } }
 
-    .wrap {
-      position: relative; z-index: 1;
-      max-width: 1000px; margin: 0 auto; padding: 0 16px;
-    }
-
+    .wrap { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 0 16px; }
     .pixel { font-family: "Press Start 2P", monospace; letter-spacing: .5px; }
 
     /* ===== Encabezado ===== */
     header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 0; gap: 12px; flex-wrap: wrap;
+      padding: 18px 0; gap: 12px; flex-wrap: wrap;
     }
-    .logo { font-size: 14px; color: var(--rosa); text-decoration: none; }
-    .logo span { color: var(--lila); }
-    .btn-discord {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #5865F2; color: #fff; text-decoration: none;
-      padding: 10px 18px; border-radius: 10px; font-weight: 800;
+    .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .marca img { width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 0 16px #ff40ff66; }
+    .marca span { font-size: 12px; color: var(--rosa); }
+    .marca span b { color: var(--lila); font-weight: 400; }
+    nav { display: flex; gap: 6px; flex-wrap: wrap; }
+    nav a { color: var(--lila); text-decoration: none; font-weight: 700; padding: 8px 10px; border-radius: 8px; }
+    nav a:hover { background: #ffffff10; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none; padding: 11px 18px; border-radius: 10px; font-weight: 800;
+      border: 0; cursor: pointer; font-family: inherit; font-size: 1rem;
       transition: transform .15s, box-shadow .15s;
     }
-    .btn-discord:hover { transform: translateY(-2px); box-shadow: 0 6px 20px #5865f266; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-discord { background: #5865F2; color: #fff; }
+    .btn-discord:hover { box-shadow: 0 6px 20px #5865f266; }
 
     /* ===== Portada ===== */
-    .hero { text-align: center; padding: 56px 0 40px; }
-    .badge {
-      display: inline-block; font-size: 10px; color: var(--bg);
-      background: var(--rosa); padding: 8px 14px; border-radius: 6px;
-      margin-bottom: 24px; animation: pulse 2s ease-in-out infinite;
+    .hero { text-align: center; padding: 30px 0 36px; }
+    .hero .logo-grande {
+      width: min(260px, 62vw); aspect-ratio: 1; border-radius: 50%;
+      box-shadow: 0 0 60px #ff40ff55, 0 0 0 4px #ff40ff33;
+      animation: flotar 5s ease-in-out infinite;
     }
-    @keyframes pulse { 50% { box-shadow: 0 0 24px #ff40ffaa; } }
+    @keyframes flotar { 50% { transform: translateY(-8px); } }
     .hero h1 {
-      font-size: clamp(22px, 6vw, 44px); line-height: 1.4;
+      font-size: clamp(18px, 5vw, 34px); line-height: 1.4; margin: 26px 0 10px;
       color: var(--rosa); text-shadow: 4px 4px 0 #5a0f5a;
-      margin-bottom: 12px;
     }
-    .hero h2 {
-      font-size: clamp(12px, 3vw, 18px); color: var(--lila); margin-bottom: 22px;
-    }
-    .hero p { color: var(--muted); max-width: 580px; margin: 0 auto 30px; font-size: 1.05rem; }
+    .hero p { color: var(--muted); max-width: 600px; margin: 0 auto 26px; font-size: 1.05rem; }
 
     /* ===== Cómo entrar ===== */
-    .ips {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px; max-width: 640px; margin: 0 auto;
-    }
-    .ip {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 16px; text-align: left;
-    }
+    .ips { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; max-width: 640px; margin: 0 auto; }
+    .ip { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: left; }
     .ip small { color: var(--muted); font-weight: 600; display: block; margin-bottom: 6px; }
     .ip-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .ip code { font-family: "Press Start 2P", monospace; font-size: 10px; color: var(--cmd); word-break: break-all; line-height: 1.8; }
@@ -121,36 +118,34 @@
       font: 600 13px "Nunito", sans-serif; transition: background .15s;
     }
     .copy:hover { background: #ffffff12; }
-    .copy.ok { border-color: #55FF55; color: #55FF55; }
+    .copy.ok { border-color: var(--ok); color: var(--ok); }
 
     /* ===== Secciones ===== */
-    section { padding: 48px 0; }
-    .titulo {
-      text-align: center; font-size: clamp(13px, 3.4vw, 20px);
-      color: var(--rosa); margin-bottom: 10px;
-    }
-    .sub { text-align: center; color: var(--muted); margin-bottom: 32px; }
+    section { padding: 44px 0; }
+    .titulo { text-align: center; font-size: clamp(13px, 3.4vw, 20px); color: var(--rosa); margin-bottom: 10px; line-height: 1.5; }
+    .sub { text-align: center; color: var(--muted); margin: 0 auto 30px; max-width: 640px; }
 
     /* ===== Tarjetas de rango ===== */
     .rangos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
     .rango {
       position: relative; background: var(--card); border: 1px solid var(--border);
       border-radius: 18px; padding: 26px 22px; overflow: hidden;
+      display: flex; flex-direction: column;
       transition: transform .2s, border-color .2s;
     }
     .rango:hover { transform: translateY(-4px); border-color: var(--c); }
-    .rango::before {
-      content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--c);
-    }
+    .rango::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--c); }
     .rango .nivel { color: var(--muted); font-size: .85rem; font-weight: 600; }
-    .rango h3 { font-family: "Press Start 2P", monospace; font-size: 15px; color: var(--c); margin: 12px 0 16px; line-height: 1.5; }
-    .rango ul { list-style: none; margin-bottom: 22px; }
-    .rango li { padding: 5px 0 5px 22px; position: relative; color: var(--text); }
+    .rango h3 { font-family: "Press Start 2P", monospace; font-size: 15px; color: var(--c); margin: 12px 0 6px; line-height: 1.5; }
+    .rango .duracion { color: var(--muted); font-size: .85rem; min-height: 1.4em; margin-bottom: 12px; }
+    .rango ul { list-style: none; margin-bottom: 22px; flex: 1; }
+    .rango li { padding: 5px 0 5px 22px; position: relative; }
     .rango li::before { content: "»"; position: absolute; left: 4px; color: var(--c); font-weight: 800; }
-    .precio {
-      display: block; text-align: center; padding: 12px; border-radius: 10px;
-      border: 1px dashed var(--c); color: var(--c); font-weight: 800;
-    }
+    .precio { text-align: center; font-weight: 800; font-size: 1.6rem; color: var(--c); margin-bottom: 12px; }
+    .precio small { font-size: .9rem; color: var(--muted); font-weight: 600; }
+    .precio.pendiente { font-size: 1rem; padding: 10px; border: 1px dashed var(--c); border-radius: 10px; }
+    .rango .btn { width: 100%; background: var(--c); color: #1a0d26; }
+    .rango .btn:hover { box-shadow: 0 6px 20px color-mix(in srgb, var(--c) 45%, transparent); }
     .vip { --c: var(--vip); }
     .vipplus { --c: var(--vipplus); }
     .gold { --c: var(--gold); }
@@ -168,22 +163,59 @@
       background: var(--gold); color: #2a1600; padding: 3px 9px; border-radius: 99px;
     }
 
-    /* ===== Aviso de juego justo ===== */
-    .justo {
+    /* ===== Cajas de texto ===== */
+    .caja {
       background: linear-gradient(135deg, #ff40ff14, #d6b8ff0d);
-      border: 1px solid var(--border); border-radius: 18px;
-      padding: 26px; display: flex; gap: 18px; align-items: flex-start;
+      border: 1px solid var(--border); border-radius: 18px; padding: 24px;
     }
-    .justo .ico { font-size: 34px; line-height: 1; }
-    .justo h3 { color: var(--lila); margin-bottom: 6px; }
-    .justo p { color: var(--muted); }
+    .caja h3 { color: var(--lila); margin-bottom: 8px; }
+    .caja p, .caja li { color: var(--muted); }
+    .pronto { margin-top: 18px; }
+    .pronto ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-top: 10px; }
+    .pronto li { padding-left: 22px; position: relative; }
+    .pronto li::before { content: "✧"; position: absolute; left: 2px; color: var(--rosa); }
+
+    /* ===== Pasos para comprar ===== */
+    .pasos { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; counter-reset: paso; }
+    .pasos li {
+      counter-increment: paso; background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 46px 16px 16px; position: relative; color: var(--muted);
+    }
+    .pasos li::before {
+      content: counter(paso); position: absolute; top: 12px; left: 16px;
+      font: 14px "Press Start 2P", monospace; color: var(--rosa);
+    }
+    .pasos .t { color: var(--text); display: block; margin-bottom: 4px; }
+    .pasos b { color: var(--text); }
+    .centro { text-align: center; margin-top: 22px; }
+
+    /* ===== Seguridad ===== */
+    .seguridad { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .seguridad .caja ul { list-style: none; }
+    .seguridad .caja li { padding: 5px 0 5px 26px; position: relative; }
+    .si li::before { content: "✔"; position: absolute; left: 2px; color: var(--ok); font-weight: 800; }
+    .no li::before { content: "✖"; position: absolute; left: 2px; color: var(--mal); font-weight: 800; }
+    .si { border-color: #55ff5540; }
+    .no { border-color: #ff555540; }
+
+    /* ===== Top de apoyadores ===== */
+    .top { max-width: 560px; margin: 0 auto; list-style: none; }
+    .top li {
+      display: flex; align-items: center; gap: 14px; padding: 12px 16px; margin-bottom: 8px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    }
+    .top .pos { font: 12px "Press Start 2P", monospace; color: var(--muted); width: 34px; }
+    .top li:nth-child(1) .pos { color: var(--gold); }
+    .top li:nth-child(2) .pos { color: #ffffff; }
+    .top li:nth-child(3) .pos { color: #FF5555; }
+    .top img { width: 32px; height: 32px; image-rendering: pixelated; border-radius: 4px; }
+    .top .nombre { flex: 1; font-weight: 800; word-break: break-all; }
+    .top .chip { font-size: .75rem; font-weight: 800; padding: 3px 9px; border-radius: 99px; color: #1a0d26; background: var(--c); }
+    .top .vacio { justify-content: center; color: var(--muted); }
 
     /* ===== Preguntas ===== */
     .faq { max-width: 720px; margin: 0 auto; }
-    details {
-      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-      margin-bottom: 10px; padding: 0 18px;
-    }
+    details { background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 0 18px; }
     summary {
       cursor: pointer; padding: 16px 0; font-weight: 800; list-style: none;
       display: flex; justify-content: space-between; gap: 12px;
@@ -193,19 +225,15 @@
     details[open] summary::after { transform: rotate(45deg); }
     details p { color: var(--muted); padding-bottom: 16px; }
 
-    /* ===== Llamado final ===== */
-    .cta { text-align: center; }
-    .cta p { color: var(--muted); margin-bottom: 22px; }
-
     footer {
       text-align: center; color: var(--muted); font-size: .82rem;
       padding: 36px 0 44px; border-top: 1px solid var(--border); margin-top: 20px;
     }
     footer p + p { margin-top: 6px; }
 
-    @media (max-width: 520px) {
-      .justo { flex-direction: column; }
-      .logo { font-size: 11px; }
+    @media (max-width: 560px) {
+      nav { display: none; }
+      .marca span { font-size: 10px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before { animation: none !important; transition: none !important; }
@@ -218,17 +246,24 @@
 
   <div class="wrap">
     <header>
-      <a class="logo pixel" href="#">✦ FUNKY <span>PUNKY</span></a>
-      <a class="btn-discord" href="https://discord.gg/xTvJvncTq" target="_blank" rel="noopener">Únete al Discord</a>
+      <a class="marca" href="#">
+        <img src="logo.webp" alt="" width="44" height="44">
+        <span class="pixel">FUNKY <b>PUNKY</b></span>
+      </a>
+      <nav>
+        <a href="#rangos">Rangos</a>
+        <a href="#comprar">Cómo comprar</a>
+        <a href="#top">Top</a>
+      </nav>
+      <a class="btn btn-discord" href="https://discord.gg/xTvJvncTq" target="_blank" rel="noopener">Discord</a>
     </header>
 
     <main>
       <!-- Portada -->
       <section class="hero">
-        <span class="badge pixel">PRÓXIMAMENTE</span>
-        <h1 class="pixel">TIENDA<br>FUNKY PUNKY</h1>
-        <h2 class="pixel">✦ Abre muy pronto ✦</h2>
-        <p>Estamos preparando el servidor y su tienda. Survival crossplay Java + Bedrock donde las Bandas comercian y compiten en trials por la Fama.</p>
+        <img class="logo-grande" src="logo.webp" alt="Logo de FUNKY PUNKY MC" width="260" height="260">
+        <h1 class="pixel">TIENDA OFICIAL</h1>
+        <p>Apoya al servidor y luce tu rango. Survival crossplay Java + Bedrock donde las Bandas comercian y compiten en trials por la Fama.</p>
 
         <div class="ips">
           <div class="ip">
@@ -251,53 +286,119 @@
       <!-- Rangos -->
       <section id="rangos">
         <h2 class="titulo pixel">Rangos de donador</h2>
-        <p class="sub">Un adelanto de lo que vendrá. Todo es cosmético.</p>
+        <p class="sub">Todo es cosmético: luces distinto, juegas igual que todos.</p>
 
         <div class="rangos">
-          <article class="rango vip">
+          <article class="rango vip" data-rango="vip">
             <span class="nivel">Nivel 1</span>
             <h3>FUNKY VIP</h3>
+            <div class="duracion"></div>
             <ul>
               <li>Prefijo [FUNKY VIP] en chat y tablist</li>
               <li>Escribir con colores en el chat</li>
-              <li>Rol en Discord</li>
+              <li>Rol 💠 FUNKY VIP en Discord</li>
             </ul>
-            <span class="precio">Precio próximamente</span>
+            <div class="precio"></div>
+            <a class="btn" href="#comprar">Cómo comprarlo</a>
           </article>
 
-          <article class="rango vipplus">
+          <article class="rango vipplus" data-rango="vipplus">
             <span class="nivel">Nivel 2</span>
             <h3>FUNKY VIP+</h3>
+            <div class="duracion"></div>
             <ul>
               <li>Todo lo de FUNKY VIP</li>
               <li>Prefijo [FUNKY VIP+]</li>
-              <li>Usar cualquier bloque como sombrero</li>
+              <li>Usar cualquier bloque como sombrero (/hat)</li>
+              <li>Rol 💜 FUNKY VIP+ en Discord</li>
             </ul>
-            <span class="precio">Precio próximamente</span>
+            <div class="precio"></div>
+            <a class="btn" href="#comprar">Cómo comprarlo</a>
           </article>
 
-          <article class="rango gold">
+          <article class="rango gold" data-rango="gold">
             <span class="tag-top">TOP</span>
             <span class="nivel">Nivel 3</span>
             <h3>FUNKY GOLD</h3>
+            <div class="duracion"></div>
             <ul>
               <li>Todo lo de FUNKY VIP+</li>
-              <li>Prefijo animado en la tablist</li>
-              <li>Apodo personalizado con colores</li>
+              <li>Prefijo animado con brillo en la tablist</li>
+              <li>Apodo personalizado con colores (/nick)</li>
+              <li>Rol 🌟 FUNKY GOLD en Discord</li>
             </ul>
-            <span class="precio">Precio próximamente</span>
+            <div class="precio"></div>
+            <a class="btn" href="#comprar">Cómo comprarlo</a>
           </article>
         </div>
+
+        <div class="caja pronto">
+          <h3>✧ Próximamente para los rangos</h3>
+          <p>Estamos preparando más cosméticos. Se anunciarán en Discord cuando estén listos.</p>
+          <ul>
+            <li>Mascotas que te siguen (solo decoración)</li>
+            <li>Modelos exclusivos de armas y herramientas (misma fuerza que las normales)</li>
+            <li>Partículas y estelas</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Cómo comprar -->
+      <section id="comprar">
+        <h2 class="titulo pixel">Cómo comprar</h2>
+        <p class="sub">Todas las compras se hacen <b>solo</b> dentro del Discord de FUNKY PUNKY MC, abriendo un ticket. Pagas en pesos mexicanos con PayPal.</p>
+
+        <ol class="pasos">
+          <li><strong class="t">Abre un ticket</strong>En el canal soporte de nuestro Discord, elige <b>💜 Tienda y creadores</b>. Escribe tu nombre en el juego y el rango que quieres.</li>
+          <li><strong class="t">Recibe el enlace de pago</strong>Un <b>OWNER</b> te manda el enlace de PayPal <b>dentro de tu ticket</b>. Nadie más puede mandártelo.</li>
+          <li><strong class="t">Paga y manda tu captura</strong>Paga con el enlace y sube la captura del pago <b>en el mismo ticket</b>.</li>
+          <li><strong class="t">Recibe tu rango</strong>Revisamos que el pago haya llegado y te damos el rango en el juego y en Discord. Te avisamos en el ticket.</li>
+        </ol>
+        <div class="centro">
+          <a class="btn btn-discord" href="https://discord.gg/xTvJvncTq" target="_blank" rel="noopener">Abrir Discord</a>
+        </div>
+      </section>
+
+      <!-- Seguridad -->
+      <section>
+        <h2 class="titulo pixel">Compra seguro</h2>
+        <p class="sub">Así reconoces una estafa. Si algo no cuadra, avísanos en un ticket.</p>
+        <div class="seguridad">
+          <div class="caja si">
+            <h3>Así es una compra real</h3>
+            <ul>
+              <li>Empieza cuando <b>tú</b> abres un ticket en nuestro Discord.</li>
+              <li>El enlace de PayPal te lo da un <b>OWNER</b> dentro de tu ticket.</li>
+              <li>La captura se sube en ese mismo ticket.</li>
+              <li>El precio es el de esta página, en pesos mexicanos.</li>
+            </ul>
+          </div>
+          <div class="caja no">
+            <h3>Esto es una estafa</h3>
+            <ul>
+              <li>Alguien te escribe por mensaje privado ofreciéndote un rango.</li>
+              <li>Te piden pagar fuera de un ticket, en otro Discord o en WhatsApp.</li>
+              <li>Te piden tu contraseña del juego o de tu cuenta.</li>
+              <li>Te ofrecen un rango "más barato" o con ventajas en el juego.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Top de apoyadores -->
+      <section id="top">
+        <h2 class="titulo pixel">Top apoyadores</h2>
+        <p class="sub">Gracias a ellos el servidor sigue encendido. ✦</p>
+        <ol class="top" id="lista-top">
+          <li class="vacio">Cargando…</li>
+        </ol>
       </section>
 
       <!-- Juego justo -->
       <section>
-        <div class="justo">
-          <div class="ico">⚖️</div>
-          <div>
-            <h3>Juego justo para todos</h3>
-            <p>Ningún rango da ventaja: no compras más tiendas, homes, oficios, dinero ni objetos. Lo que se gana en FUNKY PUNKY (la Fama de tu Banda) se gana jugando. Así lo piden las reglas de Mojang y así lo queremos nosotros.</p>
-          </div>
+        <div class="caja">
+          <h3>⚖️ Juego justo para todos</h3>
+          <p>Ningún rango da ventaja: no compras más tiendas, homes, oficios, dinero, objetos ni armas más fuertes. Lo que se gana en FUNKY PUNKY (la Fama de tu Banda) se gana jugando. Así lo piden las reglas de Mojang y así lo queremos nosotros.</p>
         </div>
       </section>
 
@@ -306,39 +407,114 @@
         <h2 class="titulo pixel">Preguntas</h2>
         <div class="faq">
           <details>
-            <summary>¿Cuándo abre el servidor?</summary>
-            <p>Muy pronto. Anunciaremos la fecha en Discord: entra y activa el rol 🔔 Anuncios para enterarte primero.</p>
+            <summary>¿Cómo compro un rango?</summary>
+            <p>Solo abriendo un ticket de 💜 Tienda y creadores en nuestro Discord. Un OWNER te manda el enlace de PayPal en el ticket, pagas, subes tu captura ahí mismo y te damos el rango.</p>
+          </details>
+          <details>
+            <summary>¿Me pueden vender un rango por mensaje privado?</summary>
+            <p>No. Nunca vendemos por mensaje privado, WhatsApp ni fuera de un ticket de nuestro Discord. Si alguien te lo ofrece así, es una estafa: repórtalo en un ticket.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto tarda en llegar mi rango?</summary>
+            <p>Lo entregamos en cuanto un OWNER confirma que el pago llegó a nuestra cuenta de PayPal. Te avisamos en tu ticket.</p>
           </details>
           <details>
             <summary>¿Puedo jugar desde celular o consola?</summary>
-            <p>Sí. Es crossplay: Java en PC y Bedrock en celular, Windows y consolas, todos en el mismo mundo.</p>
-          </details>
-          <details>
-            <summary>¿Ya puedo comprar un rango?</summary>
-            <p>Todavía no. La tienda abrirá junto con el servidor. Nunca te pediremos pagos por Discord ni por mensaje privado.</p>
+            <p>Sí. Es crossplay: Java en PC y Bedrock en celular, Windows y consolas, todos en el mismo mundo. Los rangos funcionan igual en las dos ediciones.</p>
           </details>
           <details>
             <summary>¿Necesito un rango para jugar?</summary>
             <p>No. El servidor es gratis y completo para todos. Los rangos solo sirven para lucir y apoyar al servidor.</p>
           </details>
+          <details>
+            <summary>Soy menor de edad, ¿puedo comprar?</summary>
+            <p>Pídele permiso a tu mamá, papá o tutor antes de pagar, y que sean ellos quienes hagan el pago.</p>
+          </details>
         </div>
-      </section>
-
-      <!-- Llamado final -->
-      <section class="cta">
-        <h2 class="titulo pixel">¿Te avisamos?</h2>
-        <p>Únete al Discord y activa 🔔 Anuncios para saber cuándo abrimos.</p>
-        <a class="btn-discord" href="https://discord.gg/xTvJvncTq" target="_blank" rel="noopener">Entrar al Discord</a>
       </section>
     </main>
 
     <footer>
-      <p>© <span id="year">2026</span> FUNKY PUNKY MC</p>
+      <p>© <span id="year">2026</span> FUNKY PUNKY MC · Las compras son apoyo voluntario al servidor a cambio de beneficios cosméticos.</p>
       <p>No somos un producto oficial de Minecraft. No aprobado por Mojang ni Microsoft, ni asociado con ellos.</p>
     </footer>
   </div>
 
   <script>
+    // ================================================================
+    //  CONFIGURACIÓN (lo único que normalmente se edita)
+    //  Precio en pesos mexicanos. Mientras sea null, la tarjeta dice
+    //  "Precio próximamente" (nunca anunciar un número sin decidir).
+    // ================================================================
+    const PRECIOS_MXN = { vip: null, vipplus: null, gold: null };   // ejemplo: { vip: 50, vipplus: 100, gold: 180 }
+    const DURACION = null;                                          // ejemplo: "Permanente" o "Por 30 días"
+
+    const mxn = n => "$" + n.toLocaleString("es-MX") + " ";
+
+    document.querySelectorAll(".rango").forEach(card => {
+      const precio = PRECIOS_MXN[card.dataset.rango];
+      const caja = card.querySelector(".precio");
+      if (precio == null) {
+        caja.textContent = "Precio próximamente";
+        caja.classList.add("pendiente");
+      } else {
+        caja.innerHTML = mxn(precio) + "<small>MXN</small>";
+      }
+      if (DURACION) card.querySelector(".duracion").textContent = DURACION;
+    });
+
+    // ================================================================
+    //  TOP DE APOYADORES: se lee de donadores.json (ver README.md).
+    //  Se ordena por "total" pero el monto NO se muestra a propósito.
+    // ================================================================
+    const NOMBRE_RANGO = { vip: "FUNKY VIP", vipplus: "FUNKY VIP+", gold: "FUNKY GOLD" };
+    const COLOR_RANGO = { vip: "var(--vip)", vipplus: "var(--vipplus)", gold: "var(--gold)" };
+    const LIMITE_TOP = 10;
+
+    fetch("donadores.json", { cache: "no-store" })
+      .then(r => r.ok ? r.json() : [])
+      .catch(() => [])
+      .then(lista => {
+        const ul = document.getElementById("lista-top");
+        ul.innerHTML = "";
+        const top = (Array.isArray(lista) ? lista : [])
+          .filter(d => d && d.nombre)
+          .sort((a, b) => (b.total || 0) - (a.total || 0))
+          .slice(0, LIMITE_TOP);
+        if (top.length === 0) {
+          const li = document.createElement("li");
+          li.className = "vacio";
+          li.textContent = "¡Sé el primero en apoyar al servidor!";
+          ul.appendChild(li);
+          return;
+        }
+        top.forEach((d, i) => {
+          const li = document.createElement("li");
+          const pos = document.createElement("span");
+          pos.className = "pos";
+          pos.textContent = "#" + (i + 1);
+          const cara = document.createElement("img");
+          cara.alt = "";
+          cara.loading = "lazy";
+          // Cabeza de la skin (Java). Los nombres de Bedrock empiezan con "." y no tienen skin aquí.
+          const limpio = String(d.nombre).replace(/^\./, "");
+          cara.src = "https://mc-heads.net/avatar/" + encodeURIComponent(limpio) + "/32";
+          cara.onerror = () => { cara.src = "favicon.png"; };
+          const nombre = document.createElement("span");
+          nombre.className = "nombre";
+          nombre.textContent = d.nombre;
+          li.append(pos, cara, nombre);
+          if (NOMBRE_RANGO[d.rango]) {
+            const chip = document.createElement("span");
+            chip.className = "chip";
+            chip.style.setProperty("--c", COLOR_RANGO[d.rango]);
+            chip.textContent = NOMBRE_RANGO[d.rango];
+            li.appendChild(chip);
+          }
+          ul.appendChild(li);
+        });
+      });
+
     // Botones "Copiar": copian la dirección y avisan por 1.5 s
     document.querySelectorAll(".copy").forEach(btn => {
       btn.addEventListener("click", async () => {
