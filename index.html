@@ -149,6 +149,9 @@
     .vip { --c: var(--vip); }
     .vipplus { --c: var(--vipplus); }
     .gold { --c: var(--gold); }
+    .perso { --c: var(--rosa); }
+    .perso2 { --c: var(--lila); }
+    .nota { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 16px; }
 
     /* Brillo que recorre FUNKY GOLD, igual que la animación de TAB */
     .gold h3 {
@@ -256,6 +259,7 @@
       </a>
       <nav>
         <a href="#rangos">Rangos</a>
+        <a href="#personalizados">Personalizados</a>
         <a href="#comprar">Cómo comprar</a>
         <a href="#top">Top</a>
       </nav>
@@ -350,13 +354,50 @@
         </div>
       </section>
 
+      <!-- Cosméticos personalizados (pago único) -->
+      <section id="personalizados">
+        <h2 class="titulo pixel">Hecho para ti</h2>
+        <p class="sub">Cosméticos únicos que diseñamos contigo. Pago único: son tuyos para siempre y se conservan entre temporadas.</p>
+
+        <div class="rangos">
+          <article class="rango perso" data-extra="armadura">
+            <span class="nivel">Pago único</span>
+            <h3>ARMADURA PERSONALIZADA</h3>
+            <div class="duracion">Permanente</div>
+            <ul>
+              <li>Un aspecto de armadura único con tu estilo <em class="pronto-tag">pronto</em></li>
+              <li>Solo tú puedes usarlo</li>
+              <li>Misma protección que una armadura normal: solo cambia cómo se ve</li>
+              <li>Se conserva entre temporadas</li>
+            </ul>
+            <div class="precio"></div>
+            <a class="btn" href="#comprar">Cómo pedirla</a>
+          </article>
+
+          <article class="rango perso2" data-extra="mascota">
+            <span class="nivel">Pago único</span>
+            <h3>MASCOTA PERSONALIZADA</h3>
+            <div class="duracion">Permanente</div>
+            <ul>
+              <li>Una mascota con un diseño único hecho para ti <em class="pronto-tag">pronto</em></li>
+              <li>Te sigue por el servidor (solo decoración)</li>
+              <li>No pelea, no recoge objetos y no da ventajas</li>
+              <li>Se conserva entre temporadas</li>
+            </ul>
+            <div class="precio"></div>
+            <a class="btn" href="#comprar">Cómo pedirla</a>
+          </article>
+        </div>
+        <p class="nota">Diseños originales: no podemos hacer personajes de películas, series, anime, videojuegos ni marcas.</p>
+      </section>
+
       <!-- Cómo comprar -->
       <section id="comprar">
         <h2 class="titulo pixel">Cómo comprar</h2>
         <p class="sub">Todas las compras se hacen <b>solo</b> dentro del Discord de FUNKY PUNKY MC, abriendo un ticket. Pagas en dólares (USD) con PayPal; si pagas en pesos, PayPal hace la conversión.</p>
 
         <ol class="pasos">
-          <li><strong class="t">Abre un ticket</strong>En el canal soporte de nuestro Discord, elige <b>💜 Tienda y creadores</b>. Escribe tu nombre en el juego y el rango que quieres.</li>
+          <li><strong class="t">Abre un ticket</strong>En el canal soporte de nuestro Discord, elige <b>💜 Tienda y creadores</b>. Escribe tu nombre en el juego y el rango o cosmético que quieres.</li>
           <li><strong class="t">Recibe el enlace de pago</strong>Un <b>OWNER</b> te manda el enlace de PayPal <b>dentro de tu ticket</b>. Nadie más puede mandártelo.</li>
           <li><strong class="t">Paga y manda tu captura</strong>Paga con el enlace y sube la captura del pago <b>en el mismo ticket</b>.</li>
           <li><strong class="t">Recibe tu rango</strong>Revisamos que el pago haya llegado y te damos el rango en el juego y en Discord. Te avisamos en el ticket.</li>
@@ -426,6 +467,10 @@
             <p>Lo entregamos en cuanto un OWNER confirma que el pago llegó a nuestra cuenta de PayPal. Te avisamos en tu ticket.</p>
           </details>
           <details>
+            <summary>¿Cómo funciona una armadura o mascota personalizada?</summary>
+            <p>Abres un ticket y nos cuentas tu idea. Antes de pagar te confirmamos si se puede hacer y cuánto tarda. Pagas, la diseñamos contigo y te la entregamos en el juego. Es un pago único y es tuya para siempre.</p>
+          </details>
+          <details>
             <summary>¿Cuánto dura un rango?</summary>
             <p>30 días desde que te lo damos. Al terminar, el rango se quita solo. Si lo vuelves a comprar antes de que se acabe, los días se suman a los que te quedan.</p>
           </details>
@@ -458,11 +503,12 @@
     //  "Precio próximamente" (nunca anunciar un número sin decidir).
     // ================================================================
     const PRECIOS_USD = { vip: 5, vipplus: 8, gold: 10 };          // ejemplo: { vip: 5, vipplus: 8, gold: 10 }
-    const DURACION = "Por 30 días";                                 // ejemplo: "Permanente" o "Por 30 días"
+    const DURACION = "Por 30 días";
+    const EXTRAS_USD = { armadura: 20, mascota: 20 };                  // cosméticos personalizados, pago único                                 // ejemplo: "Permanente" o "Por 30 días"
 
     const usd = n => "$" + n.toLocaleString("en-US") + " ";
 
-    document.querySelectorAll(".rango").forEach(card => {
+    document.querySelectorAll("[data-rango]").forEach(card => {
       const precio = PRECIOS_USD[card.dataset.rango];
       const caja = card.querySelector(".precio");
       if (precio == null) {
@@ -472,6 +518,17 @@
         caja.innerHTML = usd(precio) + "<small>USD</small>";
       }
       if (DURACION) card.querySelector(".duracion").textContent = DURACION;
+    });
+
+    document.querySelectorAll("[data-extra]").forEach(card => {
+      const precio = EXTRAS_USD[card.dataset.extra];
+      const caja = card.querySelector(".precio");
+      if (precio == null) {
+        caja.textContent = "Precio próximamente";
+        caja.classList.add("pendiente");
+      } else {
+        caja.innerHTML = usd(precio) + "<small>USD</small>";
+      }
     });
 
     // ================================================================
