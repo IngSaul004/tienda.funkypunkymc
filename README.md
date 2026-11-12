@@ -6,7 +6,7 @@ Página de la tienda de **FUNKY PUNKY MC** (`tienda.funkypunky.lat`, en Vercel).
 En `index.html`, al inicio del `<script>`:
 
 ```js
-const PRECIOS_MXN = { vip: null, vipplus: null, gold: null };   // ej. { vip: 50, vipplus: 100, gold: 180 }
+const PRECIOS_USD = { vip: 5, vipplus: 8, gold: 10 };          // en dólares
 const DURACION = "Por 30 días";                                      // ej. "Permanente" o "Por 30 días"
 ```
 Mientras un precio sea `null`, la tarjeta dice "Precio próximamente".
@@ -22,7 +22,7 @@ Editar `donadores.json` (lista; se ordena sola por `total`, que **no** se muestr
 ]
 ```
 - `rango`: `vip`, `vipplus` o `gold` (el más alto que haya comprado).
-- `total`: suma en MXN de todo lo que ha apoyado (si compra otra vez, se suma aquí).
+- `total`: suma en USD de todo lo que ha apoyado (si compra otra vez, se suma aquí).
 - Solo agregar a quien **aceptó** salir en el top (pregúntale en su ticket).
 - Validar el JSON antes de subirlo (una coma de más deja el top vacío).
 
